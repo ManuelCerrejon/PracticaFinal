@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * @author thera
  */
 public class NombreUsuarios extends javax.swing.JFrame {
+    int i = 1;
     HistoriaUsuario historiaUsuario;
     int num;
     String nombre="";
@@ -27,6 +28,7 @@ public class NombreUsuarios extends javax.swing.JFrame {
         num = numU;
         jLabelNumUsuarios.setText(String.valueOf(num));        
         this.jButtonContinuar.setVisible(false);
+        jLabelIntUsuario.setText((i)+":");
         
         
     }
@@ -43,7 +45,7 @@ public class NombreUsuarios extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabelNumUsuarios = new javax.swing.JLabel();
         jButtonIntroducir = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelTextoNombredeUsuario = new javax.swing.JLabel();
         jLabelIntUsuario = new javax.swing.JLabel();
         jTextFieldNombre = new javax.swing.JTextField();
         jButtonContinuar = new javax.swing.JButton();
@@ -61,7 +63,7 @@ public class NombreUsuarios extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Nombre de Usuario");
+        jLabelTextoNombredeUsuario.setText("Nombre de Usuario");
 
         jLabelIntUsuario.setText(":");
 
@@ -93,7 +95,7 @@ public class NombreUsuarios extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(51, 51, 51)
-                                .addComponent(jLabel2)
+                                .addComponent(jLabelTextoNombredeUsuario)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabelIntUsuario))
                             .addGroup(layout.createSequentialGroup()
@@ -114,7 +116,7 @@ public class NombreUsuarios extends javax.swing.JFrame {
                     .addComponent(jLabelNumUsuarios))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(jLabelTextoNombredeUsuario)
                     .addComponent(jLabelIntUsuario)
                     .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(75, 75, 75)
@@ -128,14 +130,23 @@ public class NombreUsuarios extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonIntroducirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIntroducirActionPerformed
+
         nombre = jTextFieldNombre.getText();
         listaUsuarios.add(nombre);
         historiaUsuario = new HistoriaUsuario(nombre);
-        num--;
-        if(num==0){
+        
+        
+        if(i==num){
             this.jButtonIntroducir.setVisible(false);
             this.jButtonContinuar.setVisible(true);
+            jTextFieldNombre.setVisible(false);
+            jLabelTextoNombredeUsuario.setVisible(false);
+            jLabelIntUsuario.setVisible(false);
         }
+        else
+            i++;
+            jLabelIntUsuario.setText((i)+":");
+            jTextFieldNombre.setText("");
         
     }//GEN-LAST:event_jButtonIntroducirActionPerformed
 
@@ -156,9 +167,9 @@ public class NombreUsuarios extends javax.swing.JFrame {
     public javax.swing.JButton jButtonContinuar;
     public javax.swing.JButton jButtonIntroducir;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     public javax.swing.JLabel jLabelIntUsuario;
     public javax.swing.JLabel jLabelNumUsuarios;
+    public javax.swing.JLabel jLabelTextoNombredeUsuario;
     public javax.swing.JTextField jTextFieldNombre;
     // End of variables declaration//GEN-END:variables
 }
