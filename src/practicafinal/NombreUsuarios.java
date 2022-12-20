@@ -11,8 +11,9 @@ import java.util.ArrayList;
  * @author thera
  */
 public class NombreUsuarios extends javax.swing.JFrame {
-
+    HistoriaUsuario historiaUsuario;
     int num;
+    String nombre="";
     ArrayList<String> listaUsuarios = new ArrayList<>();
     /**
      * Creates new form NombreUsuarios
@@ -24,7 +25,8 @@ public class NombreUsuarios extends javax.swing.JFrame {
     NombreUsuarios(int numU) {
         initComponents();
         num = numU;
-        jLabelNumUsuarios.setText(String.valueOf(num));
+        jLabelNumUsuarios.setText(String.valueOf(num));        
+        this.jButtonContinuar.setVisible(false);
         
         
     }
@@ -40,10 +42,11 @@ public class NombreUsuarios extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabelNumUsuarios = new javax.swing.JLabel();
-        jButtonAceptarNombre = new javax.swing.JButton();
+        jButtonIntroducir = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabelIntUsuario = new javax.swing.JLabel();
         jTextFieldNombre = new javax.swing.JTextField();
+        jButtonContinuar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,10 +54,10 @@ public class NombreUsuarios extends javax.swing.JFrame {
 
         jLabelNumUsuarios.setText("jLabel2");
 
-        jButtonAceptarNombre.setText("Introducir");
-        jButtonAceptarNombre.addActionListener(new java.awt.event.ActionListener() {
+        jButtonIntroducir.setText("Introducir");
+        jButtonIntroducir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAceptarNombreActionPerformed(evt);
+                jButtonIntroducirActionPerformed(evt);
             }
         });
 
@@ -68,6 +71,13 @@ public class NombreUsuarios extends javax.swing.JFrame {
             }
         });
 
+        jButtonContinuar.setText("Continuar");
+        jButtonContinuar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonContinuarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -75,20 +85,24 @@ public class NombreUsuarios extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(158, 158, 158)
-                        .addComponent(jButtonAceptarNombre))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(68, 68, 68)
                         .addComponent(jLabel1)
                         .addGap(29, 29, 29)
                         .addComponent(jLabelNumUsuarios))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabelIntUsuario)
-                        .addGap(38, 38, 38)
-                        .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(51, 51, 51)
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabelIntUsuario))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(98, 98, 98)
+                                .addComponent(jButtonIntroducir)))
+                        .addGap(25, 25, 25)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonContinuar)
+                            .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(103, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -103,26 +117,44 @@ public class NombreUsuarios extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabelIntUsuario)
                     .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(76, 76, 76)
-                .addComponent(jButtonAceptarNombre)
-                .addGap(24, 24, 24))
+                .addGap(75, 75, 75)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonIntroducir)
+                    .addComponent(jButtonContinuar))
+                .addGap(25, 25, 25))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonAceptarNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonAceptarNombreActionPerformed
+    private void jButtonIntroducirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIntroducirActionPerformed
+        nombre = jTextFieldNombre.getText();
+        listaUsuarios.add(nombre);
+        historiaUsuario = new HistoriaUsuario(nombre);
+        num--;
+        if(num==0){
+            this.jButtonIntroducir.setVisible(false);
+            this.jButtonContinuar.setVisible(true);
+        }
+        
+    }//GEN-LAST:event_jButtonIntroducirActionPerformed
 
+    
+    
     private void jTextFieldNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNombreActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jTextFieldNombreActionPerformed
+
+    private void jButtonContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonContinuarActionPerformed
+       historiaUsuario.setVisible(true);
+       this.setVisible(false);
+    }//GEN-LAST:event_jButtonContinuarActionPerformed
 
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton jButtonAceptarNombre;
+    public javax.swing.JButton jButtonContinuar;
+    public javax.swing.JButton jButtonIntroducir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     public javax.swing.JLabel jLabelIntUsuario;
