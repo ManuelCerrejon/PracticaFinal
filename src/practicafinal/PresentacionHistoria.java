@@ -19,8 +19,9 @@ public class PresentacionHistoria extends javax.swing.JFrame {
     ArrayList<String> listaUsuarios = new ArrayList<>();
     int i = 0;
     int j = 0;
-    
-    Comparacion comparacion = new Comparacion();
+    int n = 0;
+    String[] nombres;
+    Comparacion comparacion;
     
     
     /**
@@ -39,6 +40,8 @@ public class PresentacionHistoria extends javax.swing.JFrame {
         jLabelNU.setText("NU :"+ numUsuario );
         
         valoraciones = new String[numHistoria][numUsuario];
+        comparacion= new Comparacion(valoraciones, listaHistorias, listaUsuarios);
+
         
         jLabelNombreUsuario.setText(listaUsuarios.get(i));
         jLabelNombreHistoria.setText(listaHistorias.get(j));
@@ -184,6 +187,7 @@ public class PresentacionHistoria extends javax.swing.JFrame {
         if(i<numUsuario){  
             nota = jTextFieldNotaHistoria.getText();
             valoraciones[j][i] = nota;
+            
             i++;
             jTextFieldNotaHistoria.setText("");
             if (i  == numUsuario) {
