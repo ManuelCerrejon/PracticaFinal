@@ -4,21 +4,21 @@
  */
 package practicafinal;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author manuc
  */
 public class HistoriaUsuario extends javax.swing.JFrame {
-    
-    String nombre;
-
+    PresentacionHistoria ph;
+    String nombre="";
+    ArrayList<String> listaHistorias = new ArrayList<>();
     /**
      * Creates new form HistoriaUsuario
      */
-    public HistoriaUsuario(String nom) {
+    public HistoriaUsuario() {
         initComponents();
-        this.nombre=nom;
-        jLabelNombre.setText(nom);
     }
 
     /**
@@ -31,44 +31,92 @@ public class HistoriaUsuario extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabelNombre = new javax.swing.JLabel();
+        jTextFieldHistoria = new javax.swing.JTextField();
+        jButtonAnadir = new javax.swing.JButton();
+        jButtonFinalizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Nombre:");
+        jLabel1.setText("Historia de usuario:");
 
-        jLabelNombre.setText("jLabel2");
+        jTextFieldHistoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldHistoriaActionPerformed(evt);
+            }
+        });
+
+        jButtonAnadir.setText("Anadir");
+        jButtonAnadir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAnadirActionPerformed(evt);
+            }
+        });
+
+        jButtonFinalizar.setText("Finalizar");
+        jButtonFinalizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFinalizarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addComponent(jLabel1)
-                .addGap(87, 87, 87)
-                .addComponent(jLabelNombre)
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(jLabel1)
+                        .addGap(46, 46, 46)
+                        .addComponent(jTextFieldHistoria, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(114, 114, 114)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButtonAnadir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonFinalizar, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE))))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(90, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabelNombre))
-                .addContainerGap(266, Short.MAX_VALUE))
+                    .addComponent(jTextFieldHistoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(66, 66, 66)
+                .addComponent(jButtonAnadir)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonFinalizar)
+                .addGap(42, 42, 42))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTextFieldHistoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldHistoriaActionPerformed
+        
+    }//GEN-LAST:event_jTextFieldHistoriaActionPerformed
+
+    private void jButtonAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnadirActionPerformed
+        nombre = jTextFieldHistoria.getText();
+        listaHistorias.add(nombre);
+        ph = new PresentacionHistoria();
+    }//GEN-LAST:event_jButtonAnadirActionPerformed
+
+    private void jButtonFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFinalizarActionPerformed
+       ph.setVisible(true);
+       this.setVisible(false);
+    }//GEN-LAST:event_jButtonFinalizarActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton jButtonAnadir;
+    public javax.swing.JButton jButtonFinalizar;
     private javax.swing.JLabel jLabel1;
-    public javax.swing.JLabel jLabelNombre;
+    private javax.swing.JTextField jTextFieldHistoria;
     // End of variables declaration//GEN-END:variables
 }

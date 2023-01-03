@@ -29,8 +29,6 @@ public class NombreUsuarios extends javax.swing.JFrame {
         jLabelNumUsuarios.setText(String.valueOf(num));        
         this.jButtonContinuar.setVisible(false);
         jLabelIntUsuario.setText((i)+":");
-        
-        
     }
 
     /**
@@ -87,25 +85,24 @@ public class NombreUsuarios extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addComponent(jLabel1)
-                        .addGap(29, 29, 29)
-                        .addComponent(jLabelNumUsuarios))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(51, 51, 51)
+                        .addComponent(jLabelTextoNombredeUsuario)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabelIntUsuario)
+                        .addGap(54, 54, 54)
+                        .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jButtonContinuar)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(68, 68, 68)
+                                .addComponent(jLabel1)
+                                .addGap(29, 29, 29)
+                                .addComponent(jLabelNumUsuarios))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(51, 51, 51)
-                                .addComponent(jLabelTextoNombredeUsuario)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabelIntUsuario))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(98, 98, 98)
-                                .addComponent(jButtonIntroducir)))
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonContinuar)
-                            .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(103, Short.MAX_VALUE))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButtonIntroducir)))))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,15 +111,15 @@ public class NombreUsuarios extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabelNumUsuarios))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelTextoNombredeUsuario)
                     .addComponent(jLabelIntUsuario)
                     .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(75, 75, 75)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonIntroducir)
-                    .addComponent(jButtonContinuar))
+                .addGap(46, 46, 46)
+                .addComponent(jButtonIntroducir)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonContinuar)
                 .addGap(25, 25, 25))
         );
 
@@ -133,7 +130,7 @@ public class NombreUsuarios extends javax.swing.JFrame {
 
         nombre = jTextFieldNombre.getText();
         listaUsuarios.add(nombre);
-        historiaUsuario = new HistoriaUsuario(nombre);
+        historiaUsuario = new HistoriaUsuario();
         
         
         if(i==num){
@@ -167,9 +164,9 @@ public class NombreUsuarios extends javax.swing.JFrame {
     public javax.swing.JButton jButtonContinuar;
     public javax.swing.JButton jButtonIntroducir;
     private javax.swing.JLabel jLabel1;
-    public javax.swing.JLabel jLabelIntUsuario;
-    public javax.swing.JLabel jLabelNumUsuarios;
-    public javax.swing.JLabel jLabelTextoNombredeUsuario;
+    private javax.swing.JLabel jLabelIntUsuario;
+    private javax.swing.JLabel jLabelNumUsuarios;
+    private javax.swing.JLabel jLabelTextoNombredeUsuario;
     public javax.swing.JTextField jTextFieldNombre;
     // End of variables declaration//GEN-END:variables
 }
