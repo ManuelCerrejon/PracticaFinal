@@ -4,17 +4,48 @@
  */
 package practicafinal;
 
+import java.util.ArrayList;
+
 /**
  *
- * @author manuc
+ * @author thera
  */
 public class PresentacionHistoria extends javax.swing.JFrame {
 
+    int numUsuario, numHistoria; 
+    String nota;
+    String valoraciones[][];
+    ArrayList<String> listaHistorias = new ArrayList<>();
+    ArrayList<String> listaUsuarios = new ArrayList<>();
+    int i = 0;
+    int j = 0;
+    
+    Comparacion comparacion = new Comparacion();
+    
+    
     /**
      * Creates new form PresentacionHistoria
      */
-    public PresentacionHistoria() {
+    
+    public PresentacionHistoria(ArrayList<String> listaHistorias, ArrayList<String> listaUsuarios) {
         initComponents();
+        this.listaUsuarios = listaUsuarios;
+        this.listaHistorias = listaHistorias;
+        
+        numUsuario = listaUsuarios.size();
+        numHistoria = listaHistorias.size();
+        
+        jLabelNH.setText("NH: "+numHistoria);
+        jLabelNU.setText("NU :"+ numUsuario );
+        
+        valoraciones = new String[numHistoria][numUsuario];
+        
+        jLabelNombreUsuario.setText(listaUsuarios.get(i));
+        jLabelNombreHistoria.setText(listaHistorias.get(j));
+        
+        jButtonSiguienteHistoria.setVisible(false);
+        jButtonValoracion.setVisible(false);
+        
     }
 
     /**
@@ -26,24 +57,183 @@ public class PresentacionHistoria extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jButtonAceptarNota = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jTextFieldNotaHistoria = new javax.swing.JTextField();
+        jLabelNombreUsuario = new javax.swing.JLabel();
+        jLabelNombreHistoria = new javax.swing.JLabel();
+        jButtonSiguienteHistoria = new javax.swing.JButton();
+        jButtonValoracion = new javax.swing.JButton();
+        jLabelNH = new javax.swing.JLabel();
+        jLabelNU = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("Usuario:");
+
+        jLabel2.setText("Valoración de Historias de Usuario");
+
+        jLabel3.setText("Historia:");
+
+        jButtonAceptarNota.setText("Confirmar");
+        jButtonAceptarNota.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAceptarNotaActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Introuce Nota:");
+
+        jLabelNombreUsuario.setText("jLabel5");
+
+        jLabelNombreHistoria.setText("jLabel6");
+
+        jButtonSiguienteHistoria.setText("Siguiente Historia");
+        jButtonSiguienteHistoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSiguienteHistoriaActionPerformed(evt);
+            }
+        });
+
+        jButtonValoracion.setText("Continuar");
+        jButtonValoracion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonValoracionActionPerformed(evt);
+            }
+        });
+
+        jLabelNH.setText("jLabel5");
+
+        jLabelNU.setText("jLabel5");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(98, 98, 98)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelNombreUsuario)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
+                                .addComponent(jLabelNU))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelNombreHistoria)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabelNH))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextFieldNotaHistoria, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(89, 89, 89))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButtonAceptarNota)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonSiguienteHistoria)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonValoracion)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel2)
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabelNombreHistoria)
+                    .addComponent(jLabelNH))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabelNombreUsuario)
+                    .addComponent(jLabelNU))
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jTextFieldNotaHistoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonAceptarNota)
+                    .addComponent(jButtonSiguienteHistoria)
+                    .addComponent(jButtonValoracion))
+                .addGap(18, 18, 18))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-   
+    private void jButtonAceptarNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarNotaActionPerformed
+        
+        if (i+1 < listaUsuarios.size()) {
+           jLabelNombreUsuario.setText(listaUsuarios.get(i+1)); 
+        }      
+        
+        if(i<numUsuario){  
+            nota = jTextFieldNotaHistoria.getText();
+            valoraciones[j][i] = nota;
+            i++;
+            jTextFieldNotaHistoria.setText("");
+            if (i  == numUsuario) {
+                jButtonAceptarNota.setVisible(false);
+                jButtonSiguienteHistoria.setVisible(true);
+                
+                if (j == numHistoria-1) {
+                    jButtonAceptarNota.setVisible(false);
+                    jButtonSiguienteHistoria.setVisible(false);
+                    jButtonValoracion.setVisible(true);
+                }
+            }
+        }
+            
+            
+    }//GEN-LAST:event_jButtonAceptarNotaActionPerformed
+
+    private void jButtonSiguienteHistoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSiguienteHistoriaActionPerformed
+        j++;
+        i=0;
+        jLabelNombreUsuario.setText(listaUsuarios.get(i));
+        jLabelNombreHistoria.setText(listaHistorias.get(j));
+        jTextFieldNotaHistoria.setText("");
+        jButtonAceptarNota.setVisible(true);
+        jButtonSiguienteHistoria.setVisible(false);
+    }//GEN-LAST:event_jButtonSiguienteHistoriaActionPerformed
+
+    private void jButtonValoracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValoracionActionPerformed
+       
+       this.setVisible(false);
+       comparacion.setVisible(true);
+    }//GEN-LAST:event_jButtonValoracionActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+ 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton jButtonAceptarNota;
+    public javax.swing.JButton jButtonSiguienteHistoria;
+    public javax.swing.JButton jButtonValoracion;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    public javax.swing.JLabel jLabelNH;
+    public javax.swing.JLabel jLabelNU;
+    public javax.swing.JLabel jLabelNombreHistoria;
+    public javax.swing.JLabel jLabelNombreUsuario;
+    public javax.swing.JTextField jTextFieldNotaHistoria;
     // End of variables declaration//GEN-END:variables
 }

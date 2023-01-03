@@ -14,11 +14,13 @@ public class HistoriaUsuario extends javax.swing.JFrame {
     PresentacionHistoria ph;
     String nombre="";
     ArrayList<String> listaHistorias = new ArrayList<>();
+    ArrayList<String> listaUsuarios = new ArrayList<>();
     /**
      * Creates new form HistoriaUsuario
      */
-    public HistoriaUsuario() {
+    public HistoriaUsuario(ArrayList<String> listaUsuarios) {
         initComponents();
+        this.listaUsuarios = listaUsuarios;
     }
 
     /**
@@ -101,12 +103,14 @@ public class HistoriaUsuario extends javax.swing.JFrame {
     private void jButtonAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnadirActionPerformed
         nombre = jTextFieldHistoria.getText();
         listaHistorias.add(nombre);
-        ph = new PresentacionHistoria();
+        ph = new PresentacionHistoria(listaHistorias, listaUsuarios);
+        jTextFieldHistoria.setText("");
     }//GEN-LAST:event_jButtonAnadirActionPerformed
 
     private void jButtonFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFinalizarActionPerformed
        ph.setVisible(true);
        this.setVisible(false);
+      
     }//GEN-LAST:event_jButtonFinalizarActionPerformed
 
     /**

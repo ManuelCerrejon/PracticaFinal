@@ -130,7 +130,7 @@ public class NombreUsuarios extends javax.swing.JFrame {
 
         nombre = jTextFieldNombre.getText();
         listaUsuarios.add(nombre);
-        historiaUsuario = new HistoriaUsuario();
+        historiaUsuario = new HistoriaUsuario(listaUsuarios);
         
         
         if(i==num){
@@ -156,6 +156,7 @@ public class NombreUsuarios extends javax.swing.JFrame {
     private void jButtonContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonContinuarActionPerformed
        historiaUsuario.setVisible(true);
        this.setVisible(false);
+       
     }//GEN-LAST:event_jButtonContinuarActionPerformed
 
     
