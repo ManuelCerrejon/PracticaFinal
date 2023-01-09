@@ -36,6 +36,9 @@ public final class Comparacion extends javax.swing.JFrame {
         this.listaHistorias = listaHistorias;
         this.listaUsuarios = listaUsuarios;
         jLabelHistoria.setText(listaHistorias.get(j));
+        
+        jLabelVarianza.setText(String.valueOf(calcularVarianza()));
+        jLabelDesviacion.setText(String.valueOf(calcularDesviacion()));
     }
 
     public DefaultTableModel modeloTablaUsuario = new DefaultTableModel() {
@@ -117,6 +120,31 @@ public final class Comparacion extends javax.swing.JFrame {
             modeloTablaNotas.addRow(fila);
         }
     }
+    
+    public double calcularVarianza(){
+        float media = 0;
+        int sumatorio = 0;
+        int nUsuarios = listaUsuarios.size();
+        double varianza = 0;
+        
+        for (int y = 0; y < nUsuarios; y++) {
+            sumatorio = sumatorio + Integer.parseInt(valoraciones[i][y]);
+        }
+        media = sumatorio/nUsuarios;
+        
+        for (int y = 0; y < nUsuarios; y++) {
+           double rango; 
+           rango = Math.pow(Integer.parseInt(valoraciones[i][y]) - media, 2);
+           varianza = varianza + rango;
+        }
+        varianza = varianza/nUsuarios;
+        
+        return varianza;
+    }
+    
+    public float calcularDesviacion(){
+        return (float) Math.sqrt(calcularVarianza());
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -134,6 +162,11 @@ public final class Comparacion extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableNotas = new javax.swing.JTable();
         jButtonSiguienteHistoria = new javax.swing.JButton();
+        jButtonRepetir = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabelVarianza = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabelDesviacion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -174,6 +207,16 @@ public final class Comparacion extends javax.swing.JFrame {
             }
         });
 
+        jButtonRepetir.setText("Repeticion");
+
+        jLabel2.setText("Varianza:");
+
+        jLabelVarianza.setText("jLabel3");
+
+        jLabel3.setText("Desviacion Media:");
+
+        jLabelDesviacion.setText("jLabel4");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -181,35 +224,61 @@ public final class Comparacion extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(103, 103, 103)
+                        .addGap(197, 197, 197)
+                        .addComponent(jButtonSiguienteHistoria)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonRepetir))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
-                                .addGap(100, 100, 100)
+                                .addGap(50, 50, 50)
                                 .addComponent(jLabelHistoria))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(197, 197, 197)
-                        .addComponent(jButtonSiguienteHistoria)))
-                .addContainerGap(120, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 47, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabelVarianza))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(60, 60, 60)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabelDesviacion)))))))
+                .addGap(80, 80, 80))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(78, 78, 78)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabelHistoria))
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                .addComponent(jButtonSiguienteHistoria)
-                .addGap(25, 25, 25))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabelVarianza))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabelDesviacion))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonSiguienteHistoria)
+                            .addComponent(jButtonRepetir))
+                        .addGap(25, 25, 25))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
@@ -221,13 +290,20 @@ public final class Comparacion extends javax.swing.JFrame {
         jLabelHistoria.setText(listaHistorias.get(j));
         vaciarTablaNotas();
         rellenarTablaNotas(valoraciones, listaUsuarios);
+        jLabelVarianza.setText(String.valueOf(calcularVarianza()));
+        jLabelDesviacion.setText(String.valueOf(calcularDesviacion()));
     }//GEN-LAST:event_jButtonSiguienteHistoriaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton jButtonRepetir;
     public javax.swing.JButton jButtonSiguienteHistoria;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    public javax.swing.JLabel jLabelDesviacion;
     public javax.swing.JLabel jLabelHistoria;
+    public javax.swing.JLabel jLabelVarianza;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     public javax.swing.JTable jTableNotas;
