@@ -4,7 +4,11 @@
  */
 package practicafinal;
 
+import java.awt.Component;
+import java.awt.PopupMenu;
 import java.util.ArrayList;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -40,16 +44,46 @@ public class PresentacionHistoria extends javax.swing.JFrame {
         jLabelNU.setText("NU :"+ numUsuario );
         
         valoraciones = new String[numHistoria][numUsuario];
-        comparacion= new Comparacion(valoraciones, listaHistorias, listaUsuarios);
-
         
         jLabelNombreUsuario.setText(listaUsuarios.get(i));
         jLabelNombreHistoria.setText(listaHistorias.get(j));
         
         jButtonSiguienteHistoria.setVisible(false);
         jButtonValoracion.setVisible(false);
-        
     }
+    
+    
+     public DefaultTableModel modeloTablaUsuario = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    };
+    
+    public void asignarModelo(Comparacion comparacion) {
+        comparacion.jTableUsuarios.setModel(modeloTablaUsuario);
+    }
+    
+    public void vaciarTablaUsuarios() {
+        while (modeloTablaUsuario.getRowCount() > 0) {
+            modeloTablaUsuario.removeRow(0);
+        }
+    }
+    
+    public void dibujarTablaUsuarios(Comparacion comparacion) {
+
+        comparacion.jTableUsuarios.setModel(modeloTablaUsuario);
+        System.out.println("FUNCIONA");
+        String[] columnasTabla = {"Nombre"};
+
+        modeloTablaUsuario.setColumnIdentifiers(columnasTabla);
+
+        comparacion.jTableUsuarios.getTableHeader().setResizingAllowed(false);
+        comparacion.jTableUsuarios.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+
+        comparacion.jTableUsuarios.getColumnModel().getColumn(0).setPreferredWidth(90);
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -216,7 +250,8 @@ public class PresentacionHistoria extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSiguienteHistoriaActionPerformed
 
     private void jButtonValoracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValoracionActionPerformed
-       
+       comparacion= new Comparacion(valoraciones, listaHistorias, listaUsuarios);
+       comparacion.dibujarTablaUsuarios(comparacion);
        this.setVisible(false);
        comparacion.setVisible(true);
     }//GEN-LAST:event_jButtonValoracionActionPerformed
