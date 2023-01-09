@@ -5,12 +5,15 @@
 package practicafinal;
 
 import java.util.ArrayList;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author thera
  */
-public class Comparacion extends javax.swing.JFrame {
+public final class Comparacion extends javax.swing.JFrame{
+    Comparacion comparacion;
     String valoraciones[][];
     ArrayList<String> listaHistorias = new ArrayList<>();
     ArrayList<String> listaUsuarios = new ArrayList<>();
@@ -22,10 +25,50 @@ public class Comparacion extends javax.swing.JFrame {
      */
     public Comparacion(String valoraciones[][],ArrayList<String> listaHistorias, ArrayList<String> listaUsuarios) {
         initComponents();
+        rellenarTablaUsuarios(listaUsuarios);
         this.valoraciones=valoraciones;
         jLabelHistoria.setText(listaHistorias.get(j));
     }
+    
+    public DefaultTableModel modeloTablaUsuario = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    };
+    
+    public void asignarModelo(Comparacion comparacion) {
+        comparacion.jTableUsuarios.setModel(modeloTablaUsuario);
+    }
+    
+    public void vaciarTablaUsuarios() {
+        while (modeloTablaUsuario.getRowCount() > 0) {
+            modeloTablaUsuario.removeRow(0);
+        }
+    }
+    
+    public void dibujarTablaUsuarios(Comparacion comparacion) {
 
+        comparacion.jTableUsuarios.setModel(modeloTablaUsuario);
+        System.out.println("FUNCIONA");
+        String[] columnasTabla = {"Nombre"};
+
+        modeloTablaUsuario.setColumnIdentifiers(columnasTabla);
+
+        comparacion.jTableUsuarios.getTableHeader().setResizingAllowed(false);
+        comparacion.jTableUsuarios.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+
+        comparacion.jTableUsuarios.getColumnModel().getColumn(0).setPreferredWidth(90);
+    }
+    
+    public void rellenarTablaUsuarios(ArrayList<String> listaUsuarios) {
+        String[] fila = new String[1];
+        int numUsuarios = listaUsuarios.size();
+        for (int i = 0; i < numUsuarios; i++) {
+            fila[0] = listaUsuarios.get(i);
+            modeloTablaUsuario.addRow(fila);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -82,14 +125,15 @@ public class Comparacion extends javax.swing.JFrame {
                 .addGap(103, 103, 103)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(100, 100, 100)
-                        .addComponent(jLabelHistoria)))
-                .addContainerGap(120, Short.MAX_VALUE))
+                        .addComponent(jLabelHistoria)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 120, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
