@@ -53,7 +53,7 @@ public class PresentacionHistoria extends javax.swing.JFrame {
     }
     
     
-     public DefaultTableModel modeloTablaUsuario = new DefaultTableModel() {
+    public DefaultTableModel modeloTablaUsuario = new DefaultTableModel() {
         @Override
         public boolean isCellEditable(int row, int column) {
             return false;
@@ -82,6 +82,37 @@ public class PresentacionHistoria extends javax.swing.JFrame {
         comparacion.jTableUsuarios.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
 
         comparacion.jTableUsuarios.getColumnModel().getColumn(0).setPreferredWidth(90);
+    }
+    
+    public DefaultTableModel modeloTablaNotas = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    };
+    
+    public void asignarModeloNotas(Comparacion comparacion) {
+        comparacion.jTableNotas.setModel(modeloTablaNotas);
+    }
+    
+    public void vaciarTablaNotas() {
+        while (modeloTablaNotas.getRowCount() > 0) {
+            modeloTablaNotas.removeRow(0);
+        }
+    }
+    
+    public void dibujarTablaNotas(Comparacion comparacion) {
+
+        comparacion.jTableNotas.setModel(modeloTablaNotas);
+        System.out.println("FUNCIONA NOTAS");
+        String[] columnasTabla = {"Notas"};
+
+        modeloTablaNotas.setColumnIdentifiers(columnasTabla);
+
+        comparacion.jTableNotas.getTableHeader().setResizingAllowed(false);
+        comparacion.jTableNotas.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+
+        comparacion.jTableNotas.getColumnModel().getColumn(0).setPreferredWidth(90);
     }
     
 
@@ -251,7 +282,12 @@ public class PresentacionHistoria extends javax.swing.JFrame {
 
     private void jButtonValoracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValoracionActionPerformed
        comparacion= new Comparacion(valoraciones, listaHistorias, listaUsuarios);
+       comparacion.vaciarTablaUsuarios();
+       comparacion.vaciarTablaNotas();
        comparacion.dibujarTablaUsuarios(comparacion);
+       comparacion.rellenarTablaUsuarios(listaUsuarios);
+       comparacion.dibujarTablaNotas(comparacion);
+       comparacion.rellenarTablaNotas(valoraciones,listaUsuarios);
        this.setVisible(false);
        comparacion.setVisible(true);
     }//GEN-LAST:event_jButtonValoracionActionPerformed

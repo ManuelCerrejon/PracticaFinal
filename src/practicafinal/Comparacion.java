@@ -12,41 +12,49 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author thera
  */
-public final class Comparacion extends javax.swing.JFrame{
+public final class Comparacion extends javax.swing.JFrame {
+
     Comparacion comparacion;
     String valoraciones[][];
     ArrayList<String> listaHistorias = new ArrayList<>();
     ArrayList<String> listaUsuarios = new ArrayList<>();
-    int j=0;
+    int j = 0;
+    int i=0;
 
     /**
      * Creates new form Comparacion
+     *
      * @param valoraciones
+     * @param listaHistorias
+     * @param listaUsuarios
      */
-    public Comparacion(String valoraciones[][],ArrayList<String> listaHistorias, ArrayList<String> listaUsuarios) {
+    public Comparacion(String valoraciones[][], ArrayList<String> listaHistorias, ArrayList<String> listaUsuarios) {
         initComponents();
         rellenarTablaUsuarios(listaUsuarios);
-        this.valoraciones=valoraciones;
+        rellenarTablaNotas(valoraciones, listaUsuarios);
+        this.valoraciones = valoraciones;
+        this.listaHistorias = listaHistorias;
+        this.listaUsuarios = listaUsuarios;
         jLabelHistoria.setText(listaHistorias.get(j));
     }
-    
+
     public DefaultTableModel modeloTablaUsuario = new DefaultTableModel() {
         @Override
         public boolean isCellEditable(int row, int column) {
             return false;
         }
     };
-    
+
     public void asignarModelo(Comparacion comparacion) {
         comparacion.jTableUsuarios.setModel(modeloTablaUsuario);
     }
-    
+
     public void vaciarTablaUsuarios() {
         while (modeloTablaUsuario.getRowCount() > 0) {
             modeloTablaUsuario.removeRow(0);
         }
     }
-    
+
     public void dibujarTablaUsuarios(Comparacion comparacion) {
 
         comparacion.jTableUsuarios.setModel(modeloTablaUsuario);
@@ -60,7 +68,7 @@ public final class Comparacion extends javax.swing.JFrame{
 
         comparacion.jTableUsuarios.getColumnModel().getColumn(0).setPreferredWidth(90);
     }
-    
+
     public void rellenarTablaUsuarios(ArrayList<String> listaUsuarios) {
         String[] fila = new String[1];
         int numUsuarios = listaUsuarios.size();
@@ -69,6 +77,47 @@ public final class Comparacion extends javax.swing.JFrame{
             modeloTablaUsuario.addRow(fila);
         }
     }
+    
+    public DefaultTableModel modeloTablaNotas = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    };
+    
+    public void asignarModeloNotas(Comparacion comparacion) {
+        comparacion.jTableNotas.setModel(modeloTablaNotas);
+    }
+    
+    public void vaciarTablaNotas() {
+        while (modeloTablaNotas.getRowCount() > 0) {
+            modeloTablaNotas.removeRow(0);
+        }
+    }
+    
+    public void dibujarTablaNotas(Comparacion comparacion) {
+
+        comparacion.jTableNotas.setModel(modeloTablaNotas);
+        System.out.println("FUNCIONA");
+        String[] columnasTabla = {"Notas"};
+
+        modeloTablaNotas.setColumnIdentifiers(columnasTabla);
+
+        comparacion.jTableNotas.getTableHeader().setResizingAllowed(false);
+        comparacion.jTableNotas.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+
+        comparacion.jTableNotas.getColumnModel().getColumn(0).setPreferredWidth(90);
+    }
+
+    public void rellenarTablaNotas(String[][] valoraciones, ArrayList<String> listaUsuarios) {
+        String[] fila = new String[1];
+        int numUsuarios = listaUsuarios.size();
+        for (int k = 0; k < numUsuarios; k++) {
+            fila[0] = valoraciones[i][k];
+            modeloTablaNotas.addRow(fila);
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -84,6 +133,7 @@ public final class Comparacion extends javax.swing.JFrame{
         jTableUsuarios = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableNotas = new javax.swing.JTable();
+        jButtonSiguienteHistoria = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -117,23 +167,34 @@ public final class Comparacion extends javax.swing.JFrame{
         ));
         jScrollPane2.setViewportView(jTableNotas);
 
+        jButtonSiguienteHistoria.setText("Siguiente Historia");
+        jButtonSiguienteHistoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSiguienteHistoriaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(103, 103, 103)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(100, 100, 100)
-                        .addComponent(jLabelHistoria)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(103, 103, 103)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(100, 100, 100)
+                                .addComponent(jLabelHistoria))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 120, Short.MAX_VALUE))))
+                        .addGap(197, 197, 197)
+                        .addComponent(jButtonSiguienteHistoria)))
+                .addContainerGap(120, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,15 +207,25 @@ public final class Comparacion extends javax.swing.JFrame{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addComponent(jButtonSiguienteHistoria)
+                .addGap(25, 25, 25))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
+    private void jButtonSiguienteHistoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSiguienteHistoriaActionPerformed
+        i++;
+        j++;
+        jLabelHistoria.setText(listaHistorias.get(j));
+        vaciarTablaNotas();
+        rellenarTablaNotas(valoraciones, listaUsuarios);
+    }//GEN-LAST:event_jButtonSiguienteHistoriaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton jButtonSiguienteHistoria;
     private javax.swing.JLabel jLabel1;
     public javax.swing.JLabel jLabelHistoria;
     private javax.swing.JScrollPane jScrollPane1;
