@@ -13,11 +13,12 @@ import javax.swing.table.DefaultTableModel;
  * @author thera
  */
 public final class Comparacion extends javax.swing.JFrame {
-
+    Resultados resultados;
     Comparacion comparacion;
     String valoraciones[][];
     ArrayList<String> listaHistorias = new ArrayList<>();
     ArrayList<String> listaUsuarios = new ArrayList<>();
+    String[] listaDispersion;
     int j = 0;
     int i=0;
 
@@ -49,7 +50,7 @@ public final class Comparacion extends javax.swing.JFrame {
         }
         
         jLabelRepeticiones.setText(String.valueOf(numRepeticiones[j]));
-        
+        listaDispersion= new String[listaHistorias.size()];
     }
     
     public Comparacion(String valoraciones[][], ArrayList<String> listaHistorias, ArrayList<String> listaUsuarios, int[]numRepeticiones) {
@@ -198,6 +199,7 @@ public final class Comparacion extends javax.swing.JFrame {
         jLabelDesviacion = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabelRepeticiones = new javax.swing.JLabel();
+        jButtonFinalizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -257,6 +259,13 @@ public final class Comparacion extends javax.swing.JFrame {
 
         jLabelRepeticiones.setText("jLabel5");
 
+        jButtonFinalizar.setText("Finalizar");
+        jButtonFinalizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFinalizarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -280,14 +289,16 @@ public final class Comparacion extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabelDesviacion))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabelRepeticiones))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(66, 66, 66)
-                                .addComponent(jButtonSiguienteHistoria)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButtonRepetir)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jButtonSiguienteHistoria)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabelRepeticiones)))
+                                .addGap(26, 26, 26)
+                                .addComponent(jButtonRepetir)
+                                .addGap(30, 30, 30)
+                                .addComponent(jButtonFinalizar)))
                         .addGap(88, 88, 88))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -321,17 +332,19 @@ public final class Comparacion extends javax.swing.JFrame {
                         .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButtonSiguienteHistoria)
-                            .addComponent(jButtonRepetir))
-                        .addContainerGap())
+                            .addComponent(jButtonRepetir)
+                            .addComponent(jButtonFinalizar)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSiguienteHistoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSiguienteHistoriaActionPerformed
+        listaDispersion[j]=jLabelDesviacion.getText();
         i++;
         j++;
         jLabelHistoria.setText(listaHistorias.get(j));
@@ -349,8 +362,19 @@ public final class Comparacion extends javax.swing.JFrame {
         repetirHistoria.setVisible(true);
     }//GEN-LAST:event_jButtonRepetirActionPerformed
 
+    private void jButtonFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFinalizarActionPerformed
+        resultados = new Resultados(listaHistorias, listaDispersion);
+        resultados.dibujarTablaHistorias(resultados);
+        resultados.dibujarTablaDispersion(resultados);
+        resultados.rellenarTablaHistorias(listaHistorias);
+        resultados.rellenarTablaDispersion(listaDispersion);
+        this.setVisible(false);
+        resultados.setVisible(true);
+    }//GEN-LAST:event_jButtonFinalizarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton jButtonFinalizar;
     public javax.swing.JButton jButtonRepetir;
     public javax.swing.JButton jButtonSiguienteHistoria;
     private javax.swing.JLabel jLabel1;
