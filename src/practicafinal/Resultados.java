@@ -4,7 +4,12 @@
  */
 package practicafinal;
 
+import com.sun.xml.internal.stream.Entity;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -15,20 +20,22 @@ import javax.swing.table.DefaultTableModel;
 public final class Resultados extends javax.swing.JFrame {
     ArrayList<String> listaHistorias = new ArrayList<>();
     String[] listaDispersion;
-    ArrayList<String> listaRepetir = new ArrayList<>();
+    int[] numrepeticiones;
     /**
      * Creates new form Resultados
      * @param listaHistorias
      * @param listaDispersion
      */
-    public Resultados(ArrayList<String> listaHistorias,String[] listaDispersion /*ArrayList<String> listaRepetir*/) {
+    public Resultados(ArrayList<String> listaHistorias,String[] listaDispersion, int[] numrepeticiones) {
         initComponents();
         vaciarTablaDispersion();
         vaciarTablaHistorias();
+        vaciarTablaRepeticion();
         rellenarTablaHistorias(listaHistorias);
+        rellenarTablaDispersion(listaDispersion);
         this.listaDispersion=listaDispersion;
         this.listaHistorias=listaHistorias;
-//        this.listaRepetir=listaRepetir;
+        this.numrepeticiones=numrepeticiones;
     }
 
     public DefaultTableModel modeloTablaHistorias = new DefaultTableModel() {
@@ -91,7 +98,7 @@ public final class Resultados extends javax.swing.JFrame {
     public void dibujarTablaDispersion(Resultados resultados) {
 
         resultados.jTableDispersion.setModel(modeloTablaDispersiones);
-        System.out.println("FUNCIONA");
+        System.out.println("FUNCIONA dispersion");
         String[] columnasTabla = {"Dispersion"};
 
         modeloTablaDispersiones.setColumnIdentifiers(columnasTabla);
@@ -142,11 +149,11 @@ public final class Resultados extends javax.swing.JFrame {
         resultados.jTableRepeticion.getColumnModel().getColumn(0).setPreferredWidth(90);
     }
 
-    public void rellenarTablaRepeticion(ArrayList<String> listaDispersiones) {
-        String[] fila = new String[1];
-        int numHistorias = listaDispersiones.size();
-        for (int i = 0; i < numHistorias; i++) {
-            fila[0] = listaDispersiones.get(i);
+    public void rellenarTablaRepeticion(int[] numrepeticiones) {
+        Integer[] fila = new Integer[1];
+        int numReps = numrepeticiones.length;
+        for (int i = 0; i < numReps; i++) {
+            fila[0] = numrepeticiones[i];
             modeloTablaRepeticion.addRow(fila);
         }
     }
@@ -166,6 +173,8 @@ public final class Resultados extends javax.swing.JFrame {
         jTableDispersion = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableRepeticion = new javax.swing.JTable();
+        jButtonGuardar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -196,38 +205,86 @@ public final class Resultados extends javax.swing.JFrame {
             new String [] {
                 "Repeticion"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane3.setViewportView(jTableRepeticion);
+
+        jButtonGuardar.setText("Guardar");
+        jButtonGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGuardarActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setText("Resultados del Planning Poker");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(115, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(110, 110, 110))
             .addGroup(layout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(94, 94, 94)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                .addGap(97, 97, 97)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(120, 120, 120)
+                .addGap(57, 57, 57)
+                .addComponent(jLabel1)
+                .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButtonGuardar)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
+        try {
+            Scanner nomFich = new Scanner(System.in);
+            System.out.println("Introduce el nombre del fichero: ");
+            nomFich.next();
+            FileWriter fw = new FileWriter("reunion.txt");
+            for (String s : listaHistorias) {
+                for(String a : listaDispersion){
+                    for(int c : numrepeticiones)
+                    fw.write("Historia" + s + " Dispersion"+ a + " Repeticiones" + c + System.lineSeparator());
+                }
+            }
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButtonGuardarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton jButtonGuardar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

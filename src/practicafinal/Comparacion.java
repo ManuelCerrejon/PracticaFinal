@@ -21,6 +21,7 @@ public final class Comparacion extends javax.swing.JFrame {
     String[] listaDispersion;
     int j = 0;
     int i=0;
+    float desviacion=0;
 
     int []numRepeticiones;
     
@@ -344,14 +345,15 @@ public final class Comparacion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSiguienteHistoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSiguienteHistoriaActionPerformed
-        listaDispersion[j]=jLabelDesviacion.getText();
+        desviacion=calcularDesviacion();
+        listaDispersion[j]=Float.toString(desviacion);
         i++;
         j++;
         jLabelHistoria.setText(listaHistorias.get(j));
         jLabelRepeticiones.setText(String.valueOf(numRepeticiones[j]));
         vaciarTablaNotas();
         rellenarTablaNotas(valoraciones, listaUsuarios);
-        jLabelVarianza.setText(String.valueOf(calcularVarianza()));
+        jLabelVarianza.setText(String.valueOf(desviacion));
         jLabelDesviacion.setText(String.valueOf(calcularDesviacion()));
     }//GEN-LAST:event_jButtonSiguienteHistoriaActionPerformed
 
@@ -363,9 +365,11 @@ public final class Comparacion extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonRepetirActionPerformed
 
     private void jButtonFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFinalizarActionPerformed
-        resultados = new Resultados(listaHistorias, listaDispersion);
+        resultados = new Resultados(listaHistorias, listaDispersion, numRepeticiones);
         resultados.dibujarTablaHistorias(resultados);
         resultados.dibujarTablaDispersion(resultados);
+        resultados.dibujarTablaRepeticion(resultados);
+        resultados.rellenarTablaRepeticion(numRepeticiones);
         resultados.rellenarTablaHistorias(listaHistorias);
         resultados.rellenarTablaDispersion(listaDispersion);
         this.setVisible(false);
