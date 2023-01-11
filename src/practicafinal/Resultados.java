@@ -18,24 +18,27 @@ import javax.swing.table.DefaultTableModel;
  * @author manuc
  */
 public final class Resultados extends javax.swing.JFrame {
+
     ArrayList<String> listaHistorias = new ArrayList<>();
-    String[] listaDispersion;
+    float[] listaDispersion;
     int[] numrepeticiones;
+
     /**
      * Creates new form Resultados
+     *
      * @param listaHistorias
      * @param listaDispersion
      */
-    public Resultados(ArrayList<String> listaHistorias,String[] listaDispersion, int[] numrepeticiones) {
+    public Resultados(ArrayList<String> listaHistorias, float[] listaDispersion, int[] numrepeticiones) {
         initComponents();
         vaciarTablaDispersion();
         vaciarTablaHistorias();
         vaciarTablaRepeticion();
         rellenarTablaHistorias(listaHistorias);
         rellenarTablaDispersion(listaDispersion);
-        this.listaDispersion=listaDispersion;
-        this.listaHistorias=listaHistorias;
-        this.numrepeticiones=numrepeticiones;
+        this.listaDispersion = listaDispersion;
+        this.listaHistorias = listaHistorias;
+        this.numrepeticiones = numrepeticiones;
     }
 
     public DefaultTableModel modeloTablaHistorias = new DefaultTableModel() {
@@ -44,17 +47,17 @@ public final class Resultados extends javax.swing.JFrame {
             return false;
         }
     };
-    
+
     public void asignarModeloHistorias(Resultados resultados) {
         resultados.jTableHistorias.setModel(modeloTablaHistorias);
     }
-    
+
     public void vaciarTablaHistorias() {
         while (modeloTablaHistorias.getRowCount() > 0) {
             modeloTablaHistorias.removeRow(0);
         }
     }
-    
+
     public void dibujarTablaHistorias(Resultados resultados) {
 
         resultados.jTableHistorias.setModel(modeloTablaHistorias);
@@ -77,24 +80,24 @@ public final class Resultados extends javax.swing.JFrame {
             modeloTablaHistorias.addRow(fila);
         }
     }
-    
+
     public DefaultTableModel modeloTablaDispersiones = new DefaultTableModel() {
         @Override
         public boolean isCellEditable(int row, int column) {
             return false;
         }
     };
-    
+
     public void asignarModeloDispersion(Resultados resultados) {
         resultados.jTableDispersion.setModel(modeloTablaDispersiones);
     }
-    
+
     public void vaciarTablaDispersion() {
         while (modeloTablaDispersiones.getRowCount() > 0) {
             modeloTablaDispersiones.removeRow(0);
         }
     }
-    
+
     public void dibujarTablaDispersion(Resultados resultados) {
 
         resultados.jTableDispersion.setModel(modeloTablaDispersiones);
@@ -109,32 +112,32 @@ public final class Resultados extends javax.swing.JFrame {
         resultados.jTableDispersion.getColumnModel().getColumn(0).setPreferredWidth(90);
     }
 
-    public void rellenarTablaDispersion(String[] listaDispersiones) {
-        String[] fila = new String[1];
+    public void rellenarTablaDispersion(float[] listaDispersiones) {
+        Float[] fila = new Float[1];
         int numDispersiones = listaDispersiones.length;
         for (int i = 0; i < numDispersiones; i++) {
             fila[0] = listaDispersiones[i];
             modeloTablaDispersiones.addRow(fila);
         }
     }
-    
+
     public DefaultTableModel modeloTablaRepeticion = new DefaultTableModel() {
         @Override
         public boolean isCellEditable(int row, int column) {
             return false;
         }
     };
-    
+
     public void asignarModeloRepeticion(Resultados resultados) {
         resultados.jTableRepeticion.setModel(modeloTablaRepeticion);
     }
-    
+
     public void vaciarTablaRepeticion() {
         while (modeloTablaRepeticion.getRowCount() > 0) {
             modeloTablaRepeticion.removeRow(0);
         }
     }
-    
+
     public void dibujarTablaRepeticion(Resultados resultados) {
 
         resultados.jTableRepeticion.setModel(modeloTablaRepeticion);
@@ -157,7 +160,7 @@ public final class Resultados extends javax.swing.JFrame {
             modeloTablaRepeticion.addRow(fila);
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -269,11 +272,8 @@ public final class Resultados extends javax.swing.JFrame {
             System.out.println("Introduce el nombre del fichero: ");
             nomFich.next();
             FileWriter fw = new FileWriter("reunion.txt");
-            for (String s : listaHistorias) {
-                for(String a : listaDispersion){
-                    for(int c : numrepeticiones)
-                    fw.write("Historia" + s + " Dispersion"+ a + " Repeticiones" + c + System.lineSeparator());
-                }
+            for (int m=0; m<listaHistorias.size();m++) {
+                fw.write("Historia: " + listaHistorias.get(m) + " Dispersion: " + listaDispersion[m] + " Repeticiones: " + numrepeticiones[m] + System.lineSeparator());
             }
             fw.close();
         } catch (IOException e) {

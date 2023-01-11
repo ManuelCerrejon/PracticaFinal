@@ -18,10 +18,9 @@ public final class Comparacion extends javax.swing.JFrame {
     String valoraciones[][];
     ArrayList<String> listaHistorias = new ArrayList<>();
     ArrayList<String> listaUsuarios = new ArrayList<>();
-    String[] listaDispersion;
+    float[] listaDispersion;
     int j = 0;
     int i=0;
-    float desviacion=0;
 
     int []numRepeticiones;
     
@@ -51,7 +50,7 @@ public final class Comparacion extends javax.swing.JFrame {
         }
         
         jLabelRepeticiones.setText(String.valueOf(numRepeticiones[j]));
-        listaDispersion= new String[listaHistorias.size()];
+        listaDispersion= new float[listaHistorias.size()];
     }
     
     public Comparacion(String valoraciones[][], ArrayList<String> listaHistorias, ArrayList<String> listaUsuarios, int[]numRepeticiones) {
@@ -345,15 +344,14 @@ public final class Comparacion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSiguienteHistoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSiguienteHistoriaActionPerformed
-        desviacion=calcularDesviacion();
-        listaDispersion[j]=Float.toString(desviacion);
+        listaDispersion[j]=(Float.valueOf(jLabelDesviacion.getText()));
         i++;
         j++;
         jLabelHistoria.setText(listaHistorias.get(j));
         jLabelRepeticiones.setText(String.valueOf(numRepeticiones[j]));
         vaciarTablaNotas();
         rellenarTablaNotas(valoraciones, listaUsuarios);
-        jLabelVarianza.setText(String.valueOf(desviacion));
+        jLabelVarianza.setText(String.valueOf(calcularVarianza()));
         jLabelDesviacion.setText(String.valueOf(calcularDesviacion()));
     }//GEN-LAST:event_jButtonSiguienteHistoriaActionPerformed
 
