@@ -40,8 +40,6 @@ public class PresentacionHistoria extends javax.swing.JFrame {
         numUsuario = listaUsuarios.size();
         numHistoria = listaHistorias.size();
         
-        jLabelNH.setText("NH: "+numHistoria);
-        jLabelNU.setText("NU :"+ numUsuario );
         
         valoraciones = new String[numHistoria][numUsuario];
         
@@ -135,8 +133,6 @@ public class PresentacionHistoria extends javax.swing.JFrame {
         jLabelNombreHistoria = new javax.swing.JLabel();
         jButtonSiguienteHistoria = new javax.swing.JButton();
         jButtonValoracion = new javax.swing.JButton();
-        jLabelNH = new javax.swing.JLabel();
-        jLabelNU = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -173,10 +169,6 @@ public class PresentacionHistoria extends javax.swing.JFrame {
             }
         });
 
-        jLabelNH.setText("jLabel5");
-
-        jLabelNU.setText("jLabel5");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -191,19 +183,13 @@ public class PresentacionHistoria extends javax.swing.JFrame {
                             .addComponent(jLabel3))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelNombreUsuario)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
-                                .addComponent(jLabelNU))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelNombreHistoria)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabelNH))))
+                            .addComponent(jLabelNombreUsuario)
+                            .addComponent(jLabelNombreHistoria)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
                         .addComponent(jTextFieldNotaHistoria, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(89, 89, 89))
+                .addGap(89, 174, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButtonAceptarNota)
@@ -221,13 +207,11 @@ public class PresentacionHistoria extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabelNombreHistoria)
-                    .addComponent(jLabelNH))
+                    .addComponent(jLabelNombreHistoria))
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabelNombreUsuario)
-                    .addComponent(jLabelNU))
+                    .addComponent(jLabelNombreUsuario))
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -258,6 +242,7 @@ public class PresentacionHistoria extends javax.swing.JFrame {
             if (i  == numUsuario) {
                 jButtonAceptarNota.setVisible(false);
                 jButtonSiguienteHistoria.setVisible(true);
+                jTextFieldNotaHistoria.setVisible(false);
                 
                 if (j == numHistoria-1) {
                     jButtonAceptarNota.setVisible(false);
@@ -276,6 +261,7 @@ public class PresentacionHistoria extends javax.swing.JFrame {
         jLabelNombreUsuario.setText(listaUsuarios.get(i));
         jLabelNombreHistoria.setText(listaHistorias.get(j));
         jTextFieldNotaHistoria.setText("");
+        jTextFieldNotaHistoria.setVisible(true);
         jButtonAceptarNota.setVisible(true);
         jButtonSiguienteHistoria.setVisible(false);
     }//GEN-LAST:event_jButtonSiguienteHistoriaActionPerformed
@@ -305,8 +291,6 @@ public class PresentacionHistoria extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    public javax.swing.JLabel jLabelNH;
-    public javax.swing.JLabel jLabelNU;
     public javax.swing.JLabel jLabelNombreHistoria;
     public javax.swing.JLabel jLabelNombreUsuario;
     public javax.swing.JTextField jTextFieldNotaHistoria;

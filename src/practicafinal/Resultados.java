@@ -4,12 +4,12 @@
  */
 package practicafinal;
 
-import com.sun.xml.internal.stream.Entity;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -34,8 +34,6 @@ public final class Resultados extends javax.swing.JFrame {
         vaciarTablaDispersion();
         vaciarTablaHistorias();
         vaciarTablaRepeticion();
-        rellenarTablaHistorias(listaHistorias);
-        rellenarTablaDispersion(listaDispersion);
         this.listaDispersion = listaDispersion;
         this.listaHistorias = listaHistorias;
         this.numrepeticiones = numrepeticiones;
@@ -159,6 +157,9 @@ public final class Resultados extends javax.swing.JFrame {
             fila[0] = numrepeticiones[i];
             modeloTablaRepeticion.addRow(fila);
         }
+        
+       
+        
     }
 
     /**
@@ -268,9 +269,6 @@ public final class Resultados extends javax.swing.JFrame {
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
         try {
-            Scanner nomFich = new Scanner(System.in);
-            System.out.println("Introduce el nombre del fichero: ");
-            nomFich.next();
             FileWriter fw = new FileWriter("reunion.txt");
             for (int m=0; m<listaHistorias.size();m++) {
                 fw.write("Historia: " + listaHistorias.get(m) + " Dispersion: " + listaDispersion[m] + " Repeticiones: " + numrepeticiones[m] + System.lineSeparator());
@@ -279,6 +277,9 @@ public final class Resultados extends javax.swing.JFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
+         this.setVisible(false);
+         JOptionPane.showMessageDialog(null, "Archivo guardado correctamente.");
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
 

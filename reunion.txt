@@ -1,1 +1,2 @@
-Historiacoche Dispersionnull Repeticiones0
+Historia: crf Dispersion: 0.70710677 Repeticiones: 0
+Historia: bvn Dispersion: 0.0 Repeticiones: 1

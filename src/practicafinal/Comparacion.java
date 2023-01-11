@@ -53,7 +53,7 @@ public final class Comparacion extends javax.swing.JFrame {
         listaDispersion= new float[listaHistorias.size()];
     }
     
-    public Comparacion(String valoraciones[][], ArrayList<String> listaHistorias, ArrayList<String> listaUsuarios, int[]numRepeticiones) {
+    public Comparacion(String valoraciones[][], ArrayList<String> listaHistorias, ArrayList<String> listaUsuarios, int[]numRepeticiones, float[]listaDispersion) {
         initComponents();
         rellenarTablaUsuarios(listaUsuarios);
         rellenarTablaNotas(valoraciones, listaUsuarios);
@@ -68,6 +68,8 @@ public final class Comparacion extends javax.swing.JFrame {
         this.numRepeticiones = numRepeticiones;
         
         jLabelRepeticiones.setText(String.valueOf(numRepeticiones[j]));
+        
+        this.listaDispersion = listaDispersion;
         
     }
 
@@ -347,6 +349,9 @@ public final class Comparacion extends javax.swing.JFrame {
         listaDispersion[j]=(Float.valueOf(jLabelDesviacion.getText()));
         i++;
         j++;
+        if (j == listaHistorias.size()-1) {
+          jButtonSiguienteHistoria.setVisible(false);
+        }
         jLabelHistoria.setText(listaHistorias.get(j));
         jLabelRepeticiones.setText(String.valueOf(numRepeticiones[j]));
         vaciarTablaNotas();
@@ -357,7 +362,7 @@ public final class Comparacion extends javax.swing.JFrame {
 
     private void jButtonRepetirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRepetirActionPerformed
         numRepeticiones[j]++;
-        RepetirHistoria repetirHistoria = new RepetirHistoria(listaHistorias, listaUsuarios, j, valoraciones, numRepeticiones);
+        RepetirHistoria repetirHistoria = new RepetirHistoria(listaHistorias, listaUsuarios, j, valoraciones, numRepeticiones, listaDispersion);
         this.setVisible(false);
         repetirHistoria.setVisible(true);
     }//GEN-LAST:event_jButtonRepetirActionPerformed

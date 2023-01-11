@@ -31,6 +31,8 @@ public class RepetirHistoria extends javax.swing.JFrame {
     Comparacion comparacion;
     int[] nRep;
     
+    float[] listaDispersion;
+    
     
     
     
@@ -38,7 +40,7 @@ public class RepetirHistoria extends javax.swing.JFrame {
      * Creates new form PresentacionHistoria
      */
     
-    public RepetirHistoria(ArrayList<String> listaHistorias, ArrayList<String> listaUsuarios, int x, String valoraciones[][], int[]nRep) {
+    public RepetirHistoria(ArrayList<String> listaHistorias, ArrayList<String> listaUsuarios, int x, String valoraciones[][], int[]nRep, float[] listaDispersion) {
         initComponents();
         this.listaUsuarios = listaUsuarios;
         this.listaHistorias = listaHistorias;
@@ -48,8 +50,7 @@ public class RepetirHistoria extends javax.swing.JFrame {
         numUsuario = listaUsuarios.size();
         numHistoria = listaHistorias.size();
         
-        jLabelNH.setText("NH: "+numHistoria);
-        jLabelNU.setText("NU :"+ numUsuario );
+
         
         valoraciones = new String[numHistoria][numUsuario];
         
@@ -59,6 +60,8 @@ public class RepetirHistoria extends javax.swing.JFrame {
         jButtonValoracion.setVisible(false);
         
         this.nRep = nRep;
+        this.listaDispersion = listaDispersion;
+        jTextFieldNotaHistoria.setVisible(true);
         
     }
     
@@ -144,8 +147,6 @@ public class RepetirHistoria extends javax.swing.JFrame {
         jLabelNombreUsuario = new javax.swing.JLabel();
         jLabelNombreHistoria = new javax.swing.JLabel();
         jButtonValoracion = new javax.swing.JButton();
-        jLabelNH = new javax.swing.JLabel();
-        jLabelNU = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -175,10 +176,6 @@ public class RepetirHistoria extends javax.swing.JFrame {
             }
         });
 
-        jLabelNH.setText("jLabel5");
-
-        jLabelNU.setText("jLabel5");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -193,19 +190,13 @@ public class RepetirHistoria extends javax.swing.JFrame {
                             .addComponent(jLabel3))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelNombreUsuario)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
-                                .addComponent(jLabelNU))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelNombreHistoria)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabelNH))))
+                            .addComponent(jLabelNombreUsuario)
+                            .addComponent(jLabelNombreHistoria)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
                         .addComponent(jTextFieldNotaHistoria, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(89, 89, 89))
+                .addGap(89, 174, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButtonAceptarNota)
@@ -221,13 +212,11 @@ public class RepetirHistoria extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabelNombreHistoria)
-                    .addComponent(jLabelNH))
+                    .addComponent(jLabelNombreHistoria))
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabelNombreUsuario)
-                    .addComponent(jLabelNU))
+                    .addComponent(jLabelNombreUsuario))
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -257,6 +246,7 @@ public class RepetirHistoria extends javax.swing.JFrame {
             if (i  == numUsuario) {
                 jButtonAceptarNota.setVisible(false);
                 jButtonValoracion.setVisible(true);
+                jTextFieldNotaHistoria.setVisible(false);
                 
                 if (x == numHistoria-1) {
                     jButtonAceptarNota.setVisible(false);
@@ -269,7 +259,7 @@ public class RepetirHistoria extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAceptarNotaActionPerformed
 
     private void jButtonValoracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValoracionActionPerformed
-       comparacion= new Comparacion(valoraciones, listaHistorias, listaUsuarios, nRep);
+       comparacion= new Comparacion(valoraciones, listaHistorias, listaUsuarios, nRep, listaDispersion);
        comparacion.vaciarTablaUsuarios();
        comparacion.vaciarTablaNotas();
        comparacion.dibujarTablaUsuarios(comparacion);
@@ -292,8 +282,6 @@ public class RepetirHistoria extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    public javax.swing.JLabel jLabelNH;
-    public javax.swing.JLabel jLabelNU;
     public javax.swing.JLabel jLabelNombreHistoria;
     public javax.swing.JLabel jLabelNombreUsuario;
     public javax.swing.JTextField jTextFieldNotaHistoria;
